@@ -1,0 +1,15 @@
+note over browser:
+User writes text in the input
+end note
+
+note over browser:
+User clicks submit to add text
+end note
+
+browser->server: HTTP POST /new_note_spa
+server-->browser: [{"message":"note created"}]
+
+note over browser:
+browser executes the event handler
+that renders the notes to display
+end note

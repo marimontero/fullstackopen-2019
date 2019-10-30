@@ -1,0 +1,19 @@
+browser->server: HTTP GET /spa
+server-->browser: HTTP status code 200 OK, return HTML
+browser->server: HTTP GET /main.css
+server-->browser: HTML return main.css
+browser->server: HTTP GET /spa.js
+server-->browser: HTML return spa.js
+
+note over browser:
+browser execudes the js-code
+that requests JSON data from server
+end note
+
+browser->server: HTTP GET /data.json
+server-->browser: [{ content: "single app note", date: '2019-10-30' }, ...]
+
+note over browser:
+browser executes the event handler
+that renders the notes to display
+end note

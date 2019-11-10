@@ -8,11 +8,14 @@ const Button = ({ onClick, text }) => (
 )
 
 const Statistic = ({ text, value}) => (
-  <p>{text} {value}</p>
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
 )
 
 const Statistics = ({good, bad, neutral}) => {
-  let all = good + bad + neutral
+  const all = good + bad + neutral
 
   const getAverageScore = () => {
     if (all > 0) {
@@ -35,14 +38,16 @@ const Statistics = ({good, bad, neutral}) => {
   }
 
   return (
-    <div>
-      <Statistic text='Good' value={good} />
-      <Statistic text='Neutral' value={neutral} />
-      <Statistic text='Bad' value={bad} />
-      <Statistic text='All' value={all} />
-      <Statistic text='Average' value={getAverageScore()} />
-      <Statistic text='Positive' value={getPositivePercentage()} />
-    </div>
+    <table>
+      <tbody>
+        <Statistic text='Good' value={good} />
+        <Statistic text='Neutral' value={neutral} />
+        <Statistic text='Bad' value={bad} />
+        <Statistic text='All' value={all} />
+        <Statistic text='Average' value={getAverageScore()} />
+        <Statistic text='Positive' value={getPositivePercentage()} />
+      </tbody>
+    </table>
   )
 }
 

@@ -16,12 +16,39 @@ const App = (props) => {
     setVotes(updatedVotes)
   }
 
+  const getMaxValueVotes = anecdote => Math.max(...anecdote);
+
+  const getMaxValueIndex = anecdote => {
+    const maxValue = getMaxValueVotes(anecdote);
+    return anecdote.indexOf(maxValue);
+  };
+
+  const maxValuesContent = (props) => {
+
+    if ((getMaxValueVotes(votes)) === 0) {
+      return (
+        <span>No votes given</span>
+      )
+    }
+
+    return (
+      <>
+        <span>{anecdotes[getMaxValueIndex(votes)]}</span>
+        <strong> {getMaxValueVotes(votes)} votes</strong>
+      </>
+    )
+  }
+
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{props.anecdotes[selected]}</p>
       <p>Has {votes[selected]} votes</p>
       <button onClick={handleVoteClick}>Vote</button>
       <button onClick={handleNextAnecdoteClick}>Next anecdote</button>
+      <h1>Anecdote with most votes</h1>
+      <p anecdotes={props.anecdotes}>{maxValuesContent(votes)}</p>
     </div>
   )
 }

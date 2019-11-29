@@ -1,9 +1,9 @@
 import React from 'react'
 import Person from './person'
 
-const Persons = ({filteredContacts}) => (
+const Persons = (props) => (
   <ul style={{listStyleType: 'none', padding: '0'}}>
-    {filteredContacts.map(person => <Person key={person.name} person={person} />)}
+    {props.filteredContacts.map(person => <Person key={person.name} person={person} />)}
   </ul>
 )
 

@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Filter = ({ handler: { handleFilter }, value: { filterName } }) => (
+const Filter = (props) => (
   <form onSubmit={event => event.preventDefault()}>
     <strong>Filter shown with: </strong>
     <input
-        value={filterName}
-        onChange={handleFilter}
+        value={props.filterName}
+        onChange={props.handleFilter}
       />
   </form>
 )

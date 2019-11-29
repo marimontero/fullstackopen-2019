@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Person = ({person}) => (
-  <li key={person.name}>{person.name} {person.number}</li>
+const Person = (props) => (
+  <li key={props.person.name}>{props.person.name} {props.person.number}</li>
 )
 
 export default Person

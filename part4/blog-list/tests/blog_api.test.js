@@ -56,6 +56,24 @@ describe('when there is initially some blogs saved', () => {
   })
 })
 
+test('if likes property is missing, it will get value 0', async () => {
+  const newBlog = {
+    title: 'New methods in code',
+    author: 'Maria Jose Montero',
+    url: 'www.fullstackopen.com'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  const likes = blogsAtEnd.map(n => n.likes)
+  expect(likes).not.toContain(undefined)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })

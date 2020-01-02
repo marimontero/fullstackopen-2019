@@ -34,6 +34,26 @@ describe('when there is initially some blogs saved', () => {
     expect(response.body[0].id).toBeDefined()
   })
 
+  test('a valid blog can be added ', async () => {
+    const newBlog = {
+      title: 'New methods in code',
+      author: 'Maria Jose Montero',
+      url: 'www.fullstackopen.com',
+      likes: 10
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd.length).toBe(helper.initialBlogs.length + 1)
+
+    const title = blogsAtEnd.map(n => n.title)
+    expect(title).toContain('New methods in code')
+  })
 })
 
 afterAll(() => {

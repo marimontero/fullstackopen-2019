@@ -29,6 +29,11 @@ describe('when there is initially some blogs saved', () => {
     expect(response.body.length).toBe(helper.initialBlogs.length)
   })
 
+  test('blogs are defined with an unique id', async () => {
+    const response = await api.get('/api/blogs')
+    expect(response.body[0].id).toBeDefined()
+  })
+
 })
 
 afterAll(() => {

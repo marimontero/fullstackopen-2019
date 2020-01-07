@@ -1,6 +1,7 @@
 const express = require('express')
 const config = require('./utils/config')
 const bodyParser = require('body-parser')
+const middleware = require('./utils/middleware')
 
 const app = express()
 const cors = require('cors')
@@ -20,5 +21,6 @@ app.use(express.static('build'))
 app.use(bodyParser.json())
 
 app.use('/api/blogs', blogRouter)
+app.use(middleware.errorHandler)
 
 module.exports = app

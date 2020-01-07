@@ -54,24 +54,42 @@ describe('when there is initially some blogs saved', () => {
     const title = blogsAtEnd.map(n => n.title)
     expect(title).toContain('New methods in code')
   })
+
+  test('if likes property is missing, it will get value 0', async () => {
+    const newBlog = {
+      title: 'New methods in code',
+      author: 'Maria Jose Montero',
+      url: 'www.fullstackopen.com'
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    const likes = blogsAtEnd.map(n => n.likes)
+    expect(likes).not.toContain(undefined)
+  })
 })
 
-test('if likes property is missing, it will get value 0', async () => {
-  const newBlog = {
-    title: 'New methods in code',
-    author: 'Maria Jose Montero',
-    url: 'www.fullstackopen.com'
-  }
+describe('when there is required info missing', () => {
+  test('when url and title are missing it should return 400', async () => {
+    const newBlog = {
+      author: 'Maria Jose Montero',
+      likes: 1
+    }
 
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(201)
-    .expect('Content-Type', /application\/json/)
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
 
-  const blogsAtEnd = await helper.blogsInDb()
-  const likes = blogsAtEnd.map(n => n.likes)
-  expect(likes).not.toContain(undefined)
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
+  })
 })
 
 afterAll(() => {

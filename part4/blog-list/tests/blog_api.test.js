@@ -109,6 +109,31 @@ describe('deletion of a blog', () => {
   })
 })
 
+describe('when a blog is updated', () => {
+  test('updating the information of an individual post', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToUpdate = blogsAtStart[0]
+
+    blogToUpdate.title = 'New title'
+    blogToUpdate.url = 'www.new-url.com'
+    blogToUpdate.author = 'New author'
+    blogToUpdate.likes = 10
+
+    await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(blogToUpdate)
+      .expect(200)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
+
+    expect(blogsAtStart[0].title).toBe('New title')
+    expect(blogsAtStart[0].url).toBe('www.new-url.com')
+    expect(blogsAtStart[0].author).toBe('New author')
+    expect(blogsAtStart[0].likes).toBe(10)
+  })
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })

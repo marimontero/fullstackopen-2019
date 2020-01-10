@@ -3,6 +3,7 @@ import loginService from './services/login.js'
 import blogService from './services/blogs.js'
 import LoginForm from './components/LoginForm'
 import UserBlogs from './components/UserBlogs'
+import Notification from './components/Notification'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -10,6 +11,8 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [notification, setNotification] = useState(null)
+  const [newError, setNewError ] = useState(false)
 
   useEffect(() => {
     blogService
@@ -44,6 +47,12 @@ const App = () => {
       setPassword('')
     } catch (exception) {
       console.log('Error at login', exception)
+      setNewError(true)
+      setNotification('Wrong username or password')
+      setTimeout(() => {
+        setNotification(null)
+        setNewError(false)
+      }, 5000)
     }
   }
 
@@ -58,6 +67,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <Notification notification={notification} newError={newError}/>
       {user === null ?
         <LoginForm
           username={username}
@@ -74,6 +84,8 @@ const App = () => {
           newBlog={newBlog}
           setBlogs={setBlogs}
           handleBlogChange={handleBlogChange}
+          setNotification={setNotification}
+          setNewError={setNewError}
         />
       }
     </div>

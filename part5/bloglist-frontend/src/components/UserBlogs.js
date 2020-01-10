@@ -15,6 +15,8 @@ const UserBlogs = (props) => (
       setBlogs={props.setBlogs}
       newBlog={props.newBlog}
       handleBlogChange={props.handleBlogChange}
+      setNotification={props.setNotification}
+      setNewError={props.setNewError}
     />
     </div>
     <div style={{marginTop: "10px"}}>

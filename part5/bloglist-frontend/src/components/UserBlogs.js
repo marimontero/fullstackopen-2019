@@ -1,5 +1,6 @@
 import React from 'react'
 import Blog from './Blog'
+import CreateBlogs from './CreateBlogs'
 
 const UserBlogs = (props) => (
   <div>
@@ -8,6 +9,14 @@ const UserBlogs = (props) => (
     <button onClick={props.handleLogOut}>
       Logout
     </button>
+    <div>
+    <CreateBlogs
+      blogs={props.blogs}
+      setBlogs={props.setBlogs}
+      newBlog={props.newBlog}
+      handleBlogChange={props.handleBlogChange}
+    />
+    </div>
     <div style={{marginTop: "10px"}}>
       {props.blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />

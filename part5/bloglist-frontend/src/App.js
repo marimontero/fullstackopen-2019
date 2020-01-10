@@ -4,9 +4,9 @@ import blogService from './services/blogs.js'
 import LoginForm from './components/LoginForm'
 import UserBlogs from './components/UserBlogs'
 
-
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [newBlog, setNewBlog] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -52,6 +52,10 @@ const App = () => {
     setUser(null)
   }
 
+  const handleBlogChange = async (event) => {
+    setNewBlog(event.target.value)
+  }
+
   return (
     <div className="App">
       {user === null ?
@@ -67,6 +71,9 @@ const App = () => {
           user={user}
           blogs={blogs}
           handleLogOut={handleLogOut}
+          newBlog={newBlog}
+          setBlogs={setBlogs}
+          handleBlogChange={handleBlogChange}
         />
       }
     </div>

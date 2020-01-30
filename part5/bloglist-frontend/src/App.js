@@ -74,6 +74,25 @@ const App = () => {
       })
   }
 
+  const handleRemoveBlog = (blog) => {
+    if(window.confirm(`remove blog ${blog.title} by ${blog.author}`)){
+      blogService
+        .remove(blog.id)
+        .then(response=> {
+          setBlogs(blogs.filter(b => b.id !== blog.id));
+        })
+        .catch(error => {
+          setNotification({
+            type: 'error',
+            text: `error while deleting blog: ${error.response.data.error}`
+          })
+          setTimeout(() => {
+            setNotification({})
+          }, 5000)
+        })
+    }
+  }
+
   return (
     <div className="App">
       <Notification notification={notification} newError={newError}/>
@@ -93,6 +112,7 @@ const App = () => {
           newBlog={newBlog}
           setBlogs={setBlogs}
           handleLike={handleLike}
+          handleRemoveBlog={handleRemoveBlog}
           handleBlogChange={handleBlogChange}
           setNotification={setNotification}
           setNewError={setNewError}

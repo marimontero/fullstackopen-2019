@@ -43,7 +43,12 @@ const UserBlogs = (props) => (
       {props.blogs
         .sort((a, b) => b.likes - a.likes)
         .map(blog =>
-          <Blog key={blog.id} blog={blog} handleLike={props.handleLike}/>
+          <Blog
+            key={blog.id}
+            blog={blog}
+            handleLike={props.handleLike}
+            handleRemoveBlog={props.handleRemoveBlog}
+          />
         )
       }
     </div>

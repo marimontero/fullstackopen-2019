@@ -41,7 +41,7 @@ const UserBlogs = (props) => (
     </div>
     <div style={{marginTop: "10px"}}>
       {props.blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} handleLike={props.handleLike}/>
       )}
     </div>
   </div>

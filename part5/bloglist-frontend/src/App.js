@@ -65,6 +65,15 @@ const App = () => {
     setNewBlog(event.target.value)
   }
 
+  const  handleLike = (blog) => {
+    const updatedBlog = {...blog, likes: blog.likes + 1 };
+    blogService
+      .update(updatedBlog.id, updatedBlog)
+      .then(response=> {
+        setBlogs(blogs.map(b => b.id !== updatedBlog.id ? b : response.data))
+      })
+  }
+
   return (
     <div className="App">
       <Notification notification={notification} newError={newError}/>
@@ -83,6 +92,7 @@ const App = () => {
           handleLogOut={handleLogOut}
           newBlog={newBlog}
           setBlogs={setBlogs}
+          handleLike={handleLike}
           handleBlogChange={handleBlogChange}
           setNotification={setNotification}
           setNewError={setNewError}

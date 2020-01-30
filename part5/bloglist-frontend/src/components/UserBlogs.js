@@ -46,6 +46,7 @@ const UserBlogs = (props) => (
           <Blog
             key={blog.id}
             blog={blog}
+            user={props.user}
             handleLike={props.handleLike}
             handleRemoveBlog={props.handleRemoveBlog}
           />

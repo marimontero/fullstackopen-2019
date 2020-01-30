@@ -79,7 +79,7 @@ const App = () => {
       blogService
         .remove(blog.id)
         .then(response=> {
-          setBlogs(blogs.filter(b => b.id !== blog.id));
+          setBlogs(blogs.filter(b => b.id !== blog.id))
         })
         .catch(error => {
           setNotification({

@@ -22,24 +22,24 @@ const LoginFormContainer = (props) => {
 
 const UserBlogs = (props) => (
   <div>
-    <h2>Blogs</h2>
-    <span>{props.user.name} logged in</span>
-    <button onClick={props.handleLogOut}>
-      Logout
-    </button>
     <div>
-    <LoginFormContainer>
-      <CreateBlogs
-        blogs={props.blogs}
-        setBlogs={props.setBlogs}
-        newBlog={props.newBlog}
-        handleBlogChange={props.handleBlogChange}
-        setNotification={props.setNotification}
-        setNewError={props.setNewError}
-      />
-    </LoginFormContainer>
+      <h2>Blogs</h2>
+      <span>{props.user.name} logged in</span>
+      <button onClick={props.handleLogOut}>
+        Logout
+      </button>
+      <LoginFormContainer>
+        <CreateBlogs
+          blogs={props.blogs}
+          setBlogs={props.setBlogs}
+          newBlog={props.newBlog}
+          handleBlogChange={props.handleBlogChange}
+          setNotification={props.setNotification}
+          setNewError={props.setNewError}
+        />
+      </LoginFormContainer>
     </div>
-    <div style={{marginTop: "10px"}}>
+    <div style={{ marginTop:'10px' }}>
       {props.blogs
         .sort((a, b) => b.likes - a.likes)
         .map(blog =>

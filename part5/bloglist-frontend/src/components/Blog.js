@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 const Blog = ({ blog, user, handleLike, handleRemoveBlog }) => {
 
@@ -32,7 +32,7 @@ const Blog = ({ blog, user, handleLike, handleRemoveBlog }) => {
       <p>Added by {blog.user.username}</p>
       { user.username === blog.user.username ?
         <button onClick={() => handleRemoveBlog(blog)}>Remove</button>
-      :
+        :
         null
       }
     </div>

@@ -56,7 +56,7 @@ const App = () => {
     }
   }
 
-  const handleLogOut = async (event) => {
+  const handleLogOut = async () => {
     window.localStorage.removeItem('loggedBlogappUser')
     setUser(null)
   }
@@ -69,7 +69,7 @@ const App = () => {
     const updatedBlog = {...blog, likes: blog.likes + 1 };
     blogService
       .update(updatedBlog.id, updatedBlog)
-      .then(response=> {
+      .then(response => {
         setBlogs(blogs.map(b => b.id !== updatedBlog.id ? b : response.data))
       })
   }
@@ -78,7 +78,7 @@ const App = () => {
     if(window.confirm(`remove blog ${blog.title} by ${blog.author}`)){
       blogService
         .remove(blog.id)
-        .then(response=> {
+        .then(() => {
           setBlogs(blogs.filter(b => b.id !== blog.id))
         })
         .catch(error => {

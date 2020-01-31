@@ -10,7 +10,7 @@ const CreateBlogs = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    blogService.create({title, author, url}, props.token)
+    blogService.create({ title, author, url }, props.token)
       .then(data => {
         props.setBlogs(props.blogs.concat(data))
         setTitle('')
@@ -21,7 +21,7 @@ const CreateBlogs = (props) => {
           props.setNotification(null)
         }, 3000)
       })
-      .catch(error => {
+      .catch(() => {
         props.setNewError(true)
         props.setNotification('Error, could not create Blog post')
         setTimeout(() => {

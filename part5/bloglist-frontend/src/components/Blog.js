@@ -23,13 +23,13 @@ const Blog = ({ blog, user, handleLike, handleRemoveBlog }) => {
       </div>
     )
   }
-
   return (
     <div style={blogStyle}>
       <p onClick={() => setExpanded(false)}>{blog.title}</p>
+      <p>Author: {blog.author}</p>
       <a href={blog.url} alt={blog.title}>{blog.url}</a>
       <p>{blog.likes} likes <button onClick={() => handleLike(blog)}>like</button></p>
-      <p>added by {blog.author}</p>
+      <p>Added by {blog.user.username}</p>
       { user.username === blog.user.username ?
         <button onClick={() => handleRemoveBlog(blog)}>Remove</button>
       :

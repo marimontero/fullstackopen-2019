@@ -17,14 +17,15 @@ const Blog = ({ blog, user, handleLike, handleRemoveBlog }) => {
   if(!expanded) {
     return (
       <div
+        className='summary-blog'
         onClick={() => setExpanded(true)}
         style={blogStyle}>
-        {blog.title}
+        {blog.title} {blog.author}
       </div>
     )
   }
   return (
-    <div style={blogStyle}>
+    <div className='full-blog' style={blogStyle}>
       <p onClick={() => setExpanded(false)}>{blog.title}</p>
       <p>Author: {blog.author}</p>
       <a href={blog.url} alt={blog.title}>{blog.url}</a>

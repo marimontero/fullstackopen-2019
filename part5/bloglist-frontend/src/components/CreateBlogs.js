@@ -1,21 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import blogService from '../services/blogs'
 import PropTypes from 'prop-types'
+import  { useField } from '../hooks'
 
 const CreateBlogs = (props) => {
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  const title = useField('text', 'Title')
+  const author = useField('text', 'Author')
+  const url = useField('text', 'Url')
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    blogService.create({ title, author, url }, props.token)
+    blogService.create({
+      title: title.value, author: author.value, url: url.value
+    }, props.token)
       .then(data => {
         props.setBlogs(props.blogs.concat(data))
-        setTitle('')
-        setAuthor('')
-        setUrl('')
+        title.reset()
+        author.reset()
+        url.reset()
+
         props.setNotification('Blog was successfully created')
         setTimeout(() => {
           props.setNotification(null)
@@ -37,24 +41,15 @@ const CreateBlogs = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Title</label>
-          <input
-            value={title}
-            onChange={event => setTitle(event.target.value)}
-          />
+          <input {...title}/>
         </div>
         <div>
           <label>Author</label>
-          <input
-            value={author}
-            onChange={event => setAuthor(event.target.value)}
-          />
+          <input {...author}/>
         </div>
         <div>
           <label>Url</label>
-          <input
-            value={url}
-            onChange={event => setUrl(event.target.value)}
-          />
+          <input {...url}/>
         </div>
         <button type='submit'>Save</button>
       </form>

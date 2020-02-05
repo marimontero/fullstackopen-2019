@@ -4,12 +4,13 @@ import blogService from './services/blogs.js'
 import LoginForm from './components/LoginForm'
 import UserBlogs from './components/UserBlogs'
 import Notification from './components/Notification'
+import  { useField } from './hooks'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [newBlog, setNewBlog] = useState('')
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const username = useField('text', 'Username')
+  const password = useField('password', 'Password')
   const [user, setUser] = useState(null)
   const [notification, setNotification] = useState(null)
   const [newError, setNewError ] = useState(false)
@@ -35,7 +36,8 @@ const App = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({
-        username, password,
+        username: username.value,
+        password: password.value
       })
 
       window.localStorage.setItem(
@@ -43,8 +45,6 @@ const App = () => {
       )
       blogService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
     } catch (exception) {
       console.log('Error at login', exception)
       setNewError(true)
@@ -66,7 +66,7 @@ const App = () => {
   }
 
   const  handleLike = (blog) => {
-    const updatedBlog = {...blog, likes: blog.likes + 1 };
+    const updatedBlog = { ...blog, likes: blog.likes + 1 }
     blogService
       .update(updatedBlog.id, updatedBlog)
       .then(response => {
@@ -94,14 +94,12 @@ const App = () => {
   }
 
   return (
-    <div className="App">
+    <div className='App'>
       <Notification notification={notification} newError={newError}/>
       {user === null ?
         <LoginForm
           username={username}
           password={password}
-          setUsername={setUsername}
-          setPassword={setPassword}
           handleLogin={handleLogin}
         />
         :

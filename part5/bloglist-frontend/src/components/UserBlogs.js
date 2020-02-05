@@ -22,7 +22,7 @@ const LoginFormContainer = (props) => {
 
 const UserBlogs = (props) => (
   <div>
-    <div>
+    <div className='blogs'>
       <h2>Blogs</h2>
       <span>{props.user.name} logged in</span>
       <button onClick={props.handleLogOut}>

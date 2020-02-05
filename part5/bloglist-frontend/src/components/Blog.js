@@ -20,7 +20,7 @@ const Blog = ({ blog, user, handleLike, handleRemoveBlog }) => {
         className='summary-blog'
         onClick={() => setExpanded(true)}
         style={blogStyle}>
-        {blog.title} {blog.author}
+        {blog.title} by {blog.author}
       </div>
     )
   }

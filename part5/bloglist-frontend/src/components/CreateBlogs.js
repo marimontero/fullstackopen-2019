@@ -12,7 +12,9 @@ const CreateBlogs = (props) => {
     event.preventDefault()
 
     blogService.create({
-      title: title.value, author: author.value, url: url.value
+      title: title.data.value,
+      author: author.data.value,
+      url: url.data.value
     }, props.token)
       .then(data => {
         props.setBlogs(props.blogs.concat(data))
@@ -41,15 +43,15 @@ const CreateBlogs = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Title</label>
-          <input {...title}/>
+          <input {...title.data}/>
         </div>
         <div>
           <label>Author</label>
-          <input {...author}/>
+          <input {...author.data}/>
         </div>
         <div>
           <label>Url</label>
-          <input {...url}/>
+          <input {...url.data}/>
         </div>
         <button type='submit'>Save</button>
       </form>

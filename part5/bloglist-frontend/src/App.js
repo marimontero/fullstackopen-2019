@@ -36,8 +36,8 @@ const App = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({
-        username: username.value,
-        password: password.value
+        username: username.data.value,
+        password: password.data.value
       })
 
       window.localStorage.setItem(

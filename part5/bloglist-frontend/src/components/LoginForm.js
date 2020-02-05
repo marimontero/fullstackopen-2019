@@ -6,11 +6,11 @@ const LoginForm = (props) => (
     <form onSubmit={props.handleLogin}>
       <div>
         Username
-        <input {...props.username} />
+        <input {...props.username.data} />
       </div>
       <div>
         Password
-        <input {...props.password} />
+        <input {...props.password.data} />
       </div>
       <button type="submit">login</button>
     </form>

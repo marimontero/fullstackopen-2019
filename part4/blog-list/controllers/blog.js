@@ -41,7 +41,7 @@ blogRouter.post('/', async (request, response, next) => {
       author: body.author,
       url: body.url,
       likes: body.likes,
-      user: user._id
+      user: user
     })
 
     const savedBlog = await blog.save()
@@ -72,11 +72,14 @@ blogRouter.put('/:id', async (request, response, next) => {
     likes: body.likes
   }
 
-  Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
-    .then(updatedBlog => {
-      response.json(updatedBlog.toJSON())
-    })
-    .catch(error => next(error))
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
+    const user = await User.findById(updatedBlog.user)
+    updatedBlog.user = user
+    response.json(updatedBlog.toJSON())
+  } catch (exception) {
+    next(exception)
+  }
 })
 
 module.exports = blogRouter

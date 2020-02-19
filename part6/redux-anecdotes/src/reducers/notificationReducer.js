@@ -1,16 +1,24 @@
-export const notificationChange = (notification) => {
+const notificationReducer = (state = null, action) => {
+
+  switch(action.type){
+    case 'NOTIFICATION':
+      return action.notification;
+    default:
+      return state;
+  }
+}
+
+export const addNotification = (notification) => {
   return {
-    type: 'ADD_NOTIFICATION',
+    type: 'NOTIFICATION',
     notification
   }
 }
 
-const notificationReducer = (state = 'You voted!', action) => {
-  switch(action.type){
-    case 'ADD_NOTIFICATION':
-      return action.notification;
-    default:
-      return state;
+export const removeNotification = () => {
+  return {
+    type: 'NOTIFICATION',
+    notification: null
   }
 }
 

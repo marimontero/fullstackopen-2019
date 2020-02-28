@@ -9,13 +9,10 @@ const App = (props) => {
   return (
     <div>
       <h2>Anecdotes</h2>
-      <Filter store={props.store}/>
-      {
-        props.store.getState().notification !== null
-        && <Notification store={props.store} />
-      }
-      <AnecdoteList store={props.store}/>
-      <AnecdoteForm store={props.store}/>
+      <Filter/>
+      <Notification/>
+      <AnecdoteList/>
+      <AnecdoteForm/>
     </div>
   )
 }

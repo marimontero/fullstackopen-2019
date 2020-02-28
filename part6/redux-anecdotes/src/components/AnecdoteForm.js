@@ -1,13 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { createNewAnecdote } from '../reducers/anecdoteReducer'
 
 const AnecdoteForm = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    props.store.dispatch(
-      createNewAnecdote(e.target.anecdote.value.trim())
-    )
+    props.createNewAnecdote(e.target.anecdote.value.trim())
   }
 
   return (
@@ -21,4 +20,7 @@ const AnecdoteForm = (props) => {
   )
 }
 
-export default AnecdoteForm
+export default connect(
+  null,
+  { createNewAnecdote }
+)(AnecdoteForm)

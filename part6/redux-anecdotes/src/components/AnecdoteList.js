@@ -4,7 +4,10 @@ import { addNotification, removeNotification } from '../reducers/notificationRed
 
 const AnecdoteList = (props) => {
 
-  const anecdotes = props.store.getState().anecdote
+  const filter = props.store.getState().filter
+  const anecdotes = props.store.getState().anecdotes.filter(
+    anecdote => anecdote.content.toLowerCase().includes(filter.toLowerCase())
+  )
 
   const vote = (id) => {
     props.store.dispatch(

@@ -3,7 +3,7 @@
     {
       "content": "If it hurts, do it more often",
       "id": "47145",
-      "votes": 0
+      "votes": 1
     },
     {
       "content": "Adding manpower to a late software project makes it later!",
@@ -44,6 +44,11 @@
       "content": "One of the hardest parts of software development is knowing what to work on.",
       "votes": 0,
       "id": "bFoIb2J"
+    },
+    {
+      "content": "Good programmers write code that humans can understand.",
+      "votes": 0,
+      "id": "aaThU-2"
     }
   ]
 }

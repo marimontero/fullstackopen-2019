@@ -10,10 +10,8 @@ const AnecdoteList = (props) => {
     anecdote => anecdote.content.toLowerCase().includes(filter.toLowerCase())
   )
 
-  const vote = (id) => {
-    props.addVote(id)
-
-    const anecdote = anecdotes.find(n => n.id === id)
+  const vote = (anecdote) => {
+    props.addVote(anecdote)
     props.addNotification(`You voted '${anecdote.content}'`)
     setTimeout(() => {
       props.removeNotification()
@@ -29,7 +27,7 @@ const AnecdoteList = (props) => {
           </div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => vote(anecdote.id)}>vote</button>
+            <button onClick={() => vote(anecdote)}>vote</button>
           </div>
         </div>
       )}

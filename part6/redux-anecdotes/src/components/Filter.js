@@ -22,7 +22,4 @@ const Filter = (props) => {
   )
 }
 
-export default connect(
-  null,
-  { setFilter },
-)(Filter)
+export default connect(null, { setFilter })(Filter)

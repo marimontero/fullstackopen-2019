@@ -12,10 +12,7 @@ const AnecdoteList = (props) => {
 
   const vote = (anecdote) => {
     props.addVote(anecdote)
-    props.addNotification(`You voted '${anecdote.content}'`)
-    setTimeout(() => {
-      props.removeNotification()
-    }, 5000)
+    props.addNotification(`You voted '${anecdote.content}'`, 5)
   }
 
   return (

@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
-
 import {
   BrowserRouter as Router,
   Route, Link
 } from 'react-router-dom'
+import Anecdote from './components/anecdote';
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
     <ul>
-      {anecdotes.map(anecdote => <li key={anecdote.id} >{anecdote.content}</li>)}
+      {anecdotes.map(anecdote =>
+        <li key={anecdote.id} >
+          <Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link>
+        </li>
+      )}
     </ul>
   </div>
 )
@@ -127,6 +131,9 @@ const App = () => {
           <Link style={padding} to="/about">about</Link>
         </div>
         <Route exact path="/" render={() => <AnecdoteList anecdotes={anecdotes} />} />
+        <Route exact path="/anecdotes/:id" render={({ match }) =>
+          <Anecdote anecdote={anecdoteById(match.params.id)} />}
+        />
         <Route path="/create-new" render={() => <CreateNew addNew={addNew} />} />
         <Route path="/about" render={() => <About />} />
       </div>

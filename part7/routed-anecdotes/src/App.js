@@ -3,21 +3,31 @@ import {
   BrowserRouter as Router,
   Route, Link, Redirect
 } from 'react-router-dom'
+import { Table } from 'react-bootstrap'
 import Anecdote from './components/anecdote';
 
 const AnecdoteList = ({ anecdotes, notification }) => {
   return(
     <div>
-      <h2>Anecdotes</h2>
-      {notification === '' ? null : <p> {notification} </p>}
-      <ul>
-        {anecdotes.map(anecdote =>
-          <li key={anecdote.id} >
-            <Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link>
-          </li>
-        )}
-      </ul>
-    </div>
+     <h2>Anecdotes</h2>
+     {notification === '' ? null : <p className='alert alert-success'> {notification} </p>}
+     <Table striped>
+       <tbody>
+         {anecdotes.map(anecdote =>
+           <tr key={anecdote.id}>
+             <td>
+               <Link to={`/anecdotes/${anecdote.id}`}>
+                 {anecdote.content}
+               </Link>
+             </td>
+             <td>
+              {anecdote.author}
+             </td>
+           </tr>
+         )}
+       </tbody>
+     </Table>
+   </div>
   )
 }
 
@@ -61,21 +71,21 @@ const CreateNew = (props) => {
 
   return (
     <div>
-      <h2>create a new anecdote</h2>
+      <h2>Create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+        <div className='form-group'>
+          <label>Content</label>
+          <input className='form-control' name='content' value={content} onChange={(e) => setContent(e.target.value)} />
         </div>
-        <div>
-          author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+        <div className='form-group'>
+          <label>Author</label>
+          <input className='form-control' name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
         </div>
-        <div>
-          url for more info
-          <input name='info' value={info} onChange={(e) => setInfo(e.target.value)} />
+        <div className='form-group'>
+          <label>Url for more info</label>
+          <input className='form-control' name='info' value={info} onChange={(e) => setInfo(e.target.value)} />
         </div>
-        <button>create</button>
+        <button className='btn btn-primary'>create</button>
       </form>
     </div>
   )
@@ -129,7 +139,7 @@ const App = () => {
   return (
 
     <Router>
-      <div>
+      <div className="container">
         <h1>Software anecdotes</h1>
         <div>
           <Link style={padding} to="/">anecdotes</Link>
@@ -157,8 +167,8 @@ const App = () => {
           <Redirect to={"/"}/>
           }/>
         <Route path="/about" render={() => <About />} />
+        <Footer />
       </div>
-      <Footer />
     </Router>
   )
 }
